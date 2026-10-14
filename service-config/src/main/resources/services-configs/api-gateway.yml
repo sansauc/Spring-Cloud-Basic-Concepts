@@ -1,0 +1,29 @@
+server:
+  port: 8060
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    fetch-registry: true
+    registryFetchIntervalSeconds: 30
+    registerWithEureka: true
+
+spring:
+  cloud:
+    loadbalancer:
+      cache:
+        ttl: 5s
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: service-catalogo
+              uri: lb://service-catalogo
+              predicates:
+                - Path=/api/v1/catalogs, /api/v1/catalogs/**
+            - id: service-product
+              uri: lb://service-product
+              predicates:
+                - Path=/api/v1/products, /api/v1/products/**
+

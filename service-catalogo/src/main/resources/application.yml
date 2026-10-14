@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: service-catalogo
+  config:
+    import: optional:file:./.env[.properties],optional:file:../.env[.properties],configserver:http://localhost:8088
